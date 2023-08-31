@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wypozyczalnia</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body class="bg-light">
+
+<div th:insert="header :: nav"></div>
+<div th:insert="alerts :: div"></div>
+
+<div class ="container justify-content-between">
+    <div class="d-flex mb-5 align-items-center justify-content-between">
+<!--        <div class = "">-->
+<!--            <h1>Pulpit nawigacyjny</h1>-->
+<!--            <span>Poniżej zarządzać bazą wszystkich klientów.</span>-->
+<!--        </div>-->
+    </div>
+
+
+    <div class="d-flex align-items-stretch justify-content-around">
+        <div class="card" style="width: 18rem;">
+            <div class="card-img-top bg-success p-4 text-center display-3 font-weight-bold" th:text="${countClients}"></div>
+            <div class="card-body">
+                <h5 class="card-title">Liczba klientów</h5>
+                <p class="card-text">Nasza firma prężnie się rozwija w branży, odnotowujemy spory wzrost.</p>
+                <a th:href="@{/clients}" class="btn btn-primary">Lista klientów</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-img-top bg-warning p-4 text-center display-3 font-weight-bold" th:text="${countItems}"></div>
+            <div class="card-body">
+                <h5 class="card-title">Posiadany asortyment</h5>
+                <p class="card-text">Każdego miesiąca zwiększamy swój asortyment, aby sprostać zapotrzebowaniom klientów.</p>
+                <a th:href="@{/items}" class="btn btn-primary">Przeglądaj asortyment</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-img-top bg-primary p-4 text-center display-3 font-weight-bold" th:text="${countRenal}"></div>
+            <div class="card-body">
+                <h5 class="card-title">Wszystkich wypożyczeń</h5>
+                <p class="card-text">Nasza firma obsłużyła wielu zadowolonych klientów.<br><br></p>
+                <a th:href="@{/rentals}" class="btn btn-primary">Zarządzaj wypożyczeniami</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+

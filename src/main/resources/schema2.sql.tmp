@@ -1,0 +1,40 @@
+-- DROP TABLE IF EXISTS application_user;
+--
+-- CREATE TABLE application_user
+-- (
+--     id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+--     first_name VARCHAR(50) NOT NULL,
+--     last_name  VARCHAR(50) NOT NULL,
+--     pesel  VARCHAR(50) NOT NULL,
+--     email      VARCHAR(100) NOT NULL,
+--     password   VARCHAR(200) NOT NULL
+-- );
+--
+-- -- CREATE TABLE application_assignment
+-- -- (
+-- --     id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+-- --     start TIMESTAMP,
+-- --     end TIMESTAMP,
+-- --     client_id BIGINT,
+-- --     items_id BIGINT,
+-- --     FOREIGN KEY (client_id) REFERENCES application_client(id)
+-- --     FOREIGN KEY (items_id) REFERENCES item(id),
+-- --
+-- -- );
+--
+-- CREATE TABLE user_role
+-- (
+--     id          BIGINT AUTO_INCREMENT PRIMARY KEY,
+--     name        varchar(30)  NOT NULL,
+--     description varchar(200) NOT NULL
+-- );
+--
+-- CREATE TABLE user_roles
+-- (
+--     id      BIGINT AUTO_INCREMENT PRIMARY KEY,
+--     user_id BIGINT NOT NULL,
+--     role_id BIGINT NOT NULL,
+--     FOREIGN KEY (user_id) REFERENCES application_user(id),
+--     FOREIGN KEY (role_id) REFERENCES user_role(id)
+-- );
+--

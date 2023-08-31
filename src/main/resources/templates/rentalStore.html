@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wypozyczalnia</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body class="bg-light">
+
+<div th:insert="header :: nav"></div>
+
+<div class = "container">
+    <div class="d-flex mb-5 align-items-center justify-content-between">
+        <div class = "">
+            <h1 th:text="${rental.id} ? 'Edytuj wypożyczenie' : 'Zgłoś wypożyczenie'"></h1>
+            <span>Jeśli chcesz zgłosić nowe lub edytować wyporzyczenie wypełnij poniższy formularz.</span>
+        </div>
+        <div class = "">
+            <a th:href = "@{/rentals}" class = "btn btn-primary mb-3">Wypożyczenia</a>
+        </div>
+    </div>
+    <div class = "row">
+        <div class ="col-12 container justify-content-center card">
+            <div class = "card-body">
+                <form th:action="${rental.id} ? @{/rentals/{id} (id=${rental.id})} : @{/rentals}" th:object = "${rental}" method="POST">
+                    <div class ="form-group">
+                        <label> Początek wypozyczenia </label>
+                        <input
+                                type="date"
+                                name = "start"
+                                th:field = "*{start}"
+                                class = "form-control"
+                                placeholder="Poczatek wypozyczenia: "
+                                required
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Koniec wypozyczenia </label>
+                        <input
+                                type = "date"
+                                name = "end"
+                                th:field = "*{end}"
+                                class = "form-control"
+                                placeholder="Koniec wypozyczenia: "
+                                required
+                        />
+                    </div>
+
+                    <div class ="form-group">
+
+                        <select name='client' required class="custom-select" th:field = "*{client}">
+                            <option value="">- Wybierz klienta -</option>
+                            <option th:each = "clientN: ${clients}" th:value="${clientN.id}" th:text = "${clientN.firstName} + ' ' + ${clientN.lastName}"></option>
+                        </select>
+                    </div>
+
+                    <div class ="form-group">
+                        <select name='item' required class="custom-select" th:field = "*{item}">
+                            <option value="">- Wybierz przedmiot -</option>
+                            <option th:each = "itemN: ${items}" th:value="${itemN.id}" th:text = "${itemN.name} + ' [' + ${itemN.indeks}+ '] '"></option>
+                        </select>
+                    </div>
+
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="radio1" name="status" class="custom-control-input" value="NEW" th:checked="${rental.status.toString().equals('NEW')}">
+                        <label class="custom-control-label" for="radio1">Nowe</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="radio2" name="status" class="custom-control-input" value="ACCEPTED" th:checked="${rental.status.toString().equals('ACCEPTED')}">
+                        <label class="custom-control-label" for="radio2">Zaakceptowane</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="radio3" name="status" class="custom-control-input" value="CANCELLED" th:checked="${rental.status.toString().equals('CANCELLED')}">
+                        <label class="custom-control-label" for="radio3">Anulowane</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="radio4" name="status" class="custom-control-input" value="IN_PROGRESS" th:checked="${rental.status.toString().equals('IN_PROGRESS')}">
+                        <label class="custom-control-label" for="radio4">W trakcie</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="radio5" name="status" class="custom-control-input" value="COMPLETED" th:checked="${rental.status.toString().equals('COMPLETED')}">
+                        <label class="custom-control-label" for="radio5">Zrealizowane</label>
+                    </div>
+
+
+                    <div class = "box-footer text-right">
+                        <button type="submit" class = "btn btn-success" th:text="${rental.id} ? 'Edytuj' : '+ Zgłoś'"></button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

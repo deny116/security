@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wypozyczalnia</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body class="bg-light">
+
+<div th:insert="header :: nav"></div>
+<div th:insert="alerts :: div"></div>
+
+<div class ="container justify-content-between">
+    <div class="d-flex mb-5 align-items-center justify-content-between">
+        <div class = "">
+            <h1>Lista klientow</h1>
+            <span>Poniżej zarządzać bazą wszystkich klientów.</span>
+        </div>
+        <div class = "">
+            <a th:href = "@{/clients/new}" class = "btn btn-success mb-3">+ Dodaj klienta</a>
+        </div>
+    </div>
+    <form th:action="@{/clients}" th:object = "${client}" method="GET">
+        <div class="row mb-2 justify-content-between">
+            <div class="col-8">
+<!--miejsce na filtry-->
+            </div>
+
+            <div class="col-3 d-flex">
+                <input
+                        type = "search"
+                        name = "q"
+                        class = "form-control mr-1"
+                        placeholder=""
+                        th:value="${param.q}"
+                />
+                <button type="submit" class = "btn btn-sm btn-primary">
+                    Szukaj
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <table class = "table table-striped table-bordered">
+        <thead class = "table-dark">
+        <tr>
+            <th> Imie</th>
+            <th> Nazwisko</th>
+            <th> Pesel </th>
+            <th> Email </th>
+            <th> Akcja </th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each = "client: ${clients}">
+                <td th:text = "${client.firstName}"></td>
+                <td th:text = "${client.lastName}"></td>
+                <td th:text = "${client.pesel}"></td>
+                <td th:text = "${client.email}"></td>
+                <td>
+                    <a th:href = "@{/clients/edit/{id}(id=${client.id})}"
+                       class = "btn btn-sm btn-primary">Edycja</a>
+
+                    <a th:href = "@{/clients/{id}(id=${client.id})}"
+                       class = "btn btn-sm btn-danger">Usun</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.size(clients) == 0}" >
+                <td colspan="8" class="text-center font-italic">- Brak klientów do wyświetlenia, zmień filtry lub dodaj nowego klienta -</td>
+            </tr>
+        </tbody>
+</table>
+</div>
+</body>
+</html>
+
+

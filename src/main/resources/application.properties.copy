@@ -1,0 +1,31 @@
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2
+spring.jpa.hibernate.ddl-auto=create-drop
+logging.level.org.hibernate.SQL=DEBUG
+server.port=8081
+spring.datasource.url=jdbc:h2:mem:testdb
+#spring.datasource.url = jdbc:h2:file:C:/data/sample
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=password
+spring.jpa.defer-datasource-initialization=true
+DB_CLOSE_ON_EXIT=FALSE
+
+
+#spring.h2.console.settings.web-allow-others=true
+#spring.jpa.defer-datasource-initialization=true
+#spring.sql.init.continue-on-error=true
+
+
+debug=true
+logging.level.org.springframework=DEBUG
+logging.level.*=DEBUG
+spring.application.admin.enabled=true
+spring.codec.log-request-details=true
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+
+#prze?adowanie strony z wyczyszczeniem pamieci przegladarki Ctrl+f5
+
+

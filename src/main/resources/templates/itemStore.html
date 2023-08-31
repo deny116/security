@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wypozyczalnia</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body class="bg-light">
+
+<div th:insert="header :: nav"></div>
+
+<div class = "container">
+    <div class="d-flex mb-5 align-items-center justify-content-between">
+        <div class = "">
+            <h1 th:text="${item.id} ? 'Edytuj asortyment ' + ${item.name} : 'Dodaj asortyment'"></h1>
+            <span>Jeśli chcesz dodać nowy lub edytować asortyment wypełnij poniższy formularz.</span>
+        </div>
+        <div class = "">
+            <a th:href = "@{/items}" class = "btn btn-primary mb-3">Asortyment</a>
+        </div>
+    </div>
+    <div class = "row">
+        <div class ="col-12 container justify-content-center card">
+            <div class = "card-body">
+                <form th:action="${item.id} ? @{/items/{id} (id=${item.id})} : @{/items}" th:object = "${item}" method="POST">
+                    <div class ="form-group">
+                        <label> Indeks </label>
+                        <input
+                                type = "text"
+                                name = "indeks"
+                                th:field = "*{indeks}"
+                                class = "form-control"
+                                placeholder="RZ 23N64"
+                                required
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Nazwa </label>
+                        <input
+                                type = "text"
+                                name = "name"
+                                th:field = "*{name}"
+                                class = "form-control"
+                                placeholder="Toyota Auris"
+                                required
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Cena za dobę</label>
+                        <input
+                                type = "number"
+                                name = "hourPrice"
+                                th:field = "*{hourPrice}"
+                                class = "form-control"
+                                placeholder="125"
+                                required
+                        />
+                    </div>
+
+                    <div class = "box-footer text-right">
+                        <button type="submit" class = "btn btn-success" th:text="${item.id} ? 'Edytuj' : '+ Dodaj'"></button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
